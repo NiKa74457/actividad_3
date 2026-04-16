@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependencias
+        run: |
+          pip install Flask pytest
+          
+      - name: Simular construcción de Docker
+        run: |
+          docker build -t mi-app-flask .
+          
+      - name: Ejecutar validaciones
+        run: |
+          echo "Simulando ejecución de pruebas..."
+          # Aquí se ejecutarían los tests si existieran
